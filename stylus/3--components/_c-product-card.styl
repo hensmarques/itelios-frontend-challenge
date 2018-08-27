@@ -1,0 +1,44 @@
+.product-card
+    &--wrapper
+        padding 40px 25px 25px 25px
+        border 0.5px solid #edeaea
+        max-height 380px
+        overflow hidden
+        transition all .8s
+        background: linear-gradient(to bottom, #f4f4f4, white);
+        background-size: 100% -1%;
+        background-repeat: no-repeat;
+        
+        &:hover
+            max-height 460px
+            background-size: 100% 100%;
+
+    &--image
+        max-height 150px
+        display block
+        margin 0 auto
+
+    &--name 
+        margin-top 27px
+
+    &--price
+        color $c_teal
+        font-family $body-font-family
+        margin-bottom 10px
+
+        small 
+            color $c_teal-light
+            font-weight 300
+            font-size 16px
+    
+    &--payment-condition
+        color $c_teal-light
+        font-size 17px
+        margin 0
+
+        strong
+            color $c_teal
+
+    &--add-to-cart
+        display block
+        margin-top 25px
