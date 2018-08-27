@@ -68,9 +68,10 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__) {
 
-console.log("fadfasfasd");
+"use strict";
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'C:\\Users\\henri\\Development\\itelios-frontend-challenge\\js\\app.js'");
 
 /***/ }),
 /* 1 */
