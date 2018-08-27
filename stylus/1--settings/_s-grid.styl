@@ -2,6 +2,9 @@
 	SETTINGS: GRID
  -------------------------------------------------------------------------- */
 
+*{
+    box-sizing border-box
+}
 
 .row
     display flex
@@ -19,19 +22,19 @@
 
 for size in (1..12)
     .small-{size}
-        flex 0 0 (100 / size)%
-        max-width (100 / size)%
+        flex 0 0 ( (100 / 12) * size)%
+        max-width ( (100 / 12) * size)%
 
 
 @media $medium-only
     for size in (1..12)
         .medium-{size}
-            flex 0 0 (100 / size)%
-            max-width (100 / size)%
+            flex 0 0 ( (100 / 12) * size)%
+            max-width ( (100 / 12) * size)%
 
 
 @media $large
     for size in (1..12)
         .large-{size}
-            flex 0 0 (100 / size)%
-            max-width (100 / size)%
+            flex 0 0 ( (100 / 12) * size)%
+            max-width ( (100 / 12) * size)%
