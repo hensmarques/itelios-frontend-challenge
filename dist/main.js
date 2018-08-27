@@ -120,9 +120,11 @@ module.exports = __webpack_require__(1);
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Products_js__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Slider_js__ = __webpack_require__(13);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 
 
 
@@ -131,13 +133,19 @@ var App = function () {
         _classCallCheck(this, App);
 
         this.products = new __WEBPACK_IMPORTED_MODULE_0__Products_js__["a" /* default */]();
+        this.slider = new __WEBPACK_IMPORTED_MODULE_1__Slider_js__["a" /* default */]({ el: '.product-slider', children: '.product-slider--item' });
+
         this.ready();
     }
 
     _createClass(App, [{
         key: 'ready',
         value: function ready() {
-            this.products.fetchProducts();
+            var _this = this;
+
+            this.products.fetchProducts().then(function () {
+                _this.slider.init();
+            });
         }
     }]);
 
@@ -180,11 +188,15 @@ var Products = function () {
         value: function fetchProducts() {
             var _this = this;
 
-            return __WEBPACK_IMPORTED_MODULE_0__http_js__["a" /* default */].get('/products.json', function (response) {
-                if (response.length > 0) {
-                    _this.data = response[0].data;
-                    _this.renderProducts();
-                }
+            return new Promise(function (resolve, reject) {
+                __WEBPACK_IMPORTED_MODULE_0__http_js__["a" /* default */].get('/products.json', function (response) {
+                    if (response.length > 0) {
+                        _this.data = response[0].data;
+                        _this.renderProducts();
+
+                        resolve();
+                    }
+                });
             });
         }
     }, {
@@ -230,6 +242,116 @@ var Products = function () {
 }();
 
 /* harmony default export */ __webpack_exports__["a"] = (Products);
+
+/***/ }),
+/* 13 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Slider = function () {
+    function Slider(params) {
+        _classCallCheck(this, Slider);
+
+        this.params = {
+            el: (typeof params === 'undefined' ? 'undefined' : _typeof(params)) == 'object' ? params.el : params,
+            children: (typeof params === 'undefined' ? 'undefined' : _typeof(params)) == 'object' ? params.children : el + ' > *'
+        };
+
+        this.data = {
+            el: '',
+            childre: [],
+            childrenLength: 0,
+            currentIndex: 0,
+            itens_per_page: 3
+        };
+    }
+
+    _createClass(Slider, [{
+        key: 'init',
+        value: function init() {
+            this.data.el = document.querySelector(this.params.el);
+            this.data.children = document.querySelectorAll(this.params.el + ' ' + this.params.children);
+            this.data.childrenLength = this.data.children.length;
+            this.data.pagination = document.querySelector(this.params.el + ' + .product-slider--pagination');
+
+            this.renderPagination();
+            this.addScrollEvent();
+        }
+    }, {
+        key: 'renderPagination',
+        value: function renderPagination() {
+            var dotsQtd = Math.round(this.data.childrenLength / this.data.itens_per_page) + this.data.childrenLength % this.data.itens_per_page;
+
+            this.data.pagination.innerHTML = '';
+
+            for (var i = 0; i < dotsQtd; i++) {
+                this.data.pagination.innerHTML += '<li class="' + (i == 0 ? 'active' : '') + '"></li>';
+            }
+
+            this.data.pagination_children = document.querySelectorAll(this.params.el + ' + .product-slider--pagination li');
+            this.addPaginationEvent();
+        }
+    }, {
+        key: 'addPaginationEvent',
+        value: function addPaginationEvent() {
+            var _this = this;
+
+            this.data.pagination_children.forEach(function (li) {
+
+                li.addEventListener("click", function (event) {
+                    var dots_nodes = Array.prototype.slice.call(_this.data.pagination_children);
+                    _this.data.currentIndex = dots_nodes.indexOf(event.target);
+                    _this.setChildrenStyle();
+
+                    _this.data.pagination_children.forEach(function (pag_child) {
+                        return pag_child.classList = '';
+                    });
+                    event.target.className = 'active';
+                });
+            });
+        }
+    }, {
+        key: 'setChildrenStyle',
+        value: function setChildrenStyle() {
+            var _this2 = this;
+
+            this.data.children.forEach(function (child) {
+                child.style = 'transform: translateX(' + -100 * _this2.data.currentIndex * _this2.data.itens_per_page + '%)';
+            });
+        }
+    }, {
+        key: 'addScrollEvent',
+        value: function addScrollEvent() {
+            var _this3 = this;
+
+            window.addEventListener("resize", function (event) {
+                if (window.innerWidth >= 1025) {
+                    _this3.data.itens_per_page = 3;
+                }
+
+                if (window.innerWidth > 640 && window.innerWidth <= 1024) {
+                    _this3.data.itens_per_page = 2;
+                }
+
+                if (window.innerWidth <= 640) {
+                    _this3.data.itens_per_page = 1;
+                }
+
+                _this3.renderPagination();
+            });
+        }
+    }]);
+
+    return Slider;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Slider);
 
 /***/ })
 /******/ ]);
