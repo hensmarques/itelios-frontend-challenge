@@ -7,7 +7,8 @@ class App{
     }
 
     ready() {
-        this.products.fetchProducts()   
+        this.products.fetchProducts().then( () => {
+        })
     }
 
 }
