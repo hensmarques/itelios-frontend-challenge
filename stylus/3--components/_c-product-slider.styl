@@ -1,6 +1,37 @@
 .product-slider
-    display: flex;
-    overflow: hidden;
-    
+    display flex
+    overflow hidden
+
+    &--wrapper
+        position relative
+
     &--item 
-        flex: 0 0 33%;
+        flex 0 0 100%
+        background-color white
+
+        @media $medium-only
+            flex 0 0 50%
+
+        @media $large
+            flex 0 0 33%
+
+
+    &--pagination
+        display flex
+        justify-content center
+        padding 0
+        position absolute
+        margin-left 50%
+        transform translateX(-50%)
+        top 400px
+        z-index -1
+        
+        li
+            list-style-type none
+            width 13px
+            height 13px
+            margin-left 7px
+            border-radius 50%
+            background-color #adadad
+            &.active
+                background-color #353f4f
