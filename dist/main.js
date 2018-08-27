@@ -119,7 +119,7 @@ module.exports = __webpack_require__(1);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__http_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Products_js__ = __webpack_require__(12);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -130,22 +130,52 @@ var App = function () {
     function App() {
         _classCallCheck(this, App);
 
-        //Defining the app's model structure
-        this.data = {
-            item: {},
-            recomendation: [],
-            widget: { size: 0 }
-        };
-
+        this.products = new __WEBPACK_IMPORTED_MODULE_0__Products_js__["a" /* default */]();
         this.ready();
     }
 
     _createClass(App, [{
         key: 'ready',
         value: function ready() {
-            this.fetchProducts();
+            this.products.fetchProducts();
         }
-    }, {
+    }]);
+
+    return App;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (App);
+
+/***/ }),
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__http_js__ = __webpack_require__(5);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var Products = function () {
+    function Products() {
+        _classCallCheck(this, Products);
+
+        //Defining the app's model structure
+        this.data = {
+            item: {},
+            recomendation: [],
+            widget: { size: 0 }
+        };
+    }
+
+    _createClass(Products, [{
         key: 'fetchProducts',
         value: function fetchProducts() {
             var _this = this;
@@ -177,7 +207,7 @@ var App = function () {
         key: 'renderProduct',
         value: function renderProduct(product, containerSelector) {
 
-            document.getElementById(containerSelector).innerHTML += '\n        <div class="product-card--wrapper">\n            <img src="' + product.imageName.replace('//www.itelios.com.br/arquivos/imagens', '/images') + '" alt="' + product.name + '" class="product-card--image">\n            <p class="product-card--name">' + this.substringText(product.name) + '</p>\n            <h3 class="product-card--price"><small>Por:</small> ' + product.price + '</h3>\n            <p class="product-card--payment-condition">' + product.productInfo.paymentConditions + '</p>\n\n            <a href="#" class="button product-card--add-to-cart">Adicionar ao Carrinho</a>\n        </div>\n        ';
+            document.getElementById(containerSelector).innerHTML += '\n        <div class="product-card--wrapper product-slider--item">\n            <img src="' + product.imageName.replace('//www.itelios.com.br/arquivos/imagens', '/images') + '" alt="' + product.name + '" class="product-card--image">\n            <p class="product-card--name">' + this.substringText(product.name) + '</p>\n            <h3 class="product-card--price"><small>Por:</small> ' + product.price + '</h3>\n            <p class="product-card--payment-condition">' + product.productInfo.paymentConditions + '</p>\n\n            <a href="#" class="button product-card--add-to-cart">Adicionar ao Carrinho</a>\n        </div>\n        ';
         }
     }, {
         key: 'substringText',
@@ -196,10 +226,10 @@ var App = function () {
         }
     }]);
 
-    return App;
+    return Products;
 }();
 
-/* harmony default export */ __webpack_exports__["a"] = (App);
+/* harmony default export */ __webpack_exports__["a"] = (Products);
 
 /***/ })
 /******/ ]);
