@@ -43,7 +43,7 @@ class Products {
             <h3 class="product-card--price"><small>Por:</small> ${ product.price}</h3>
             <p class="product-card--payment-condition">${ this.getPaymentMethodHTML(product.productInfo.paymentConditions) }</p>
 
-            <a href="#" class="button product-card--add-to-cart">Adicionar ao Carrinho</a>
+            <a href="#" class="button product-card--add-to-cart">Adicionar ao Carrinho <i class="material-icons">add_shopping_cart</i></a>
         </div>
         `
     }
