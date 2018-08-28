@@ -219,7 +219,7 @@ var Products = function () {
         key: 'renderProduct',
         value: function renderProduct(product, containerSelector) {
 
-            document.getElementById(containerSelector).innerHTML += '\n        <div class="product-card--wrapper product-slider--item">\n            <img src="' + product.imageName.replace('//www.itelios.com.br/arquivos/imagens', '/images') + '" alt="' + product.name + '" class="product-card--image">\n            <p class="product-card--name">' + this.substringText(product.name) + '</p>\n            <h3 class="product-card--price"><small>Por:</small> ' + product.price + '</h3>\n            <p class="product-card--payment-condition">' + product.productInfo.paymentConditions + '</p>\n\n            <a href="#" class="button product-card--add-to-cart">Adicionar ao Carrinho</a>\n        </div>\n        ';
+            document.getElementById(containerSelector).innerHTML += '\n        <div class="product-card--wrapper product-slider--item">\n            <a href="#" class="product-card--permalink">\n                <img src="' + product.imageName.replace('//www.itelios.com.br/arquivos/imagens', '/images') + '" alt="' + product.name + '" class="product-card--image">\n                <p class="product-card--name">' + this.substringText(product.name) + '</p>\n                <h3 class="product-card--price"><small>Por:</small> ' + product.price + '</h3>\n                <p class="product-card--payment-condition">' + this.getPaymentMethodHTML(product.productInfo.paymentConditions) + '</p>\n            </a>\n\n            <a href="#" class="button product-card--add-to-cart">Adicionar ao Carrinho <i class="material-icons">add_shopping_cart</i></a>\n        </div>\n        ';
         }
     }, {
         key: 'substringText',
@@ -235,6 +235,14 @@ var Products = function () {
             }
 
             return formattedStr;
+        }
+    }, {
+        key: 'getPaymentMethodHTML',
+        value: function getPaymentMethodHTML(str) {
+            var reg = /(?<=ou até)(.*)(?=sem juros)/;
+            var regMatch = str.match(reg);
+
+            return regMatch ? str.replace(regMatch[0], '<strong>' + regMatch[0] + '</strong>') : str;
         }
     }]);
 
@@ -282,7 +290,7 @@ var Slider = function () {
 
             this.renderPagination();
             this.setItensPerPage();
-            this.addScrollEvent();
+            this.addResizeEvent();
         }
     }, {
         key: 'renderPagination',
@@ -292,7 +300,7 @@ var Slider = function () {
             this.data.pagination.innerHTML = '';
 
             for (var i = 0; i < dotsQtd; i++) {
-                this.data.pagination.innerHTML += '<li class="' + (i == 0 ? 'active' : '') + '"></li>';
+                this.data.pagination.innerHTML += '<li class="' + (i == this.data.currentIndex ? 'active' : '') + '"></li>';
             }
 
             this.data.pagination_children = document.querySelectorAll(this.params.el + ' + .product-slider--pagination li');
@@ -318,8 +326,8 @@ var Slider = function () {
             });
         }
     }, {
-        key: 'addScrollEvent',
-        value: function addScrollEvent() {
+        key: 'addResizeEvent',
+        value: function addResizeEvent() {
             var _this2 = this;
 
             window.addEventListener("resize", function (event) {

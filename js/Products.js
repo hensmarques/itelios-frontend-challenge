@@ -38,10 +38,12 @@ class Products {
 
         document.getElementById(containerSelector).innerHTML += `
         <div class="product-card--wrapper product-slider--item">
-            <img src="${ product.imageName.replace('//www.itelios.com.br/arquivos/imagens', '/images')}" alt="${product.name}" class="product-card--image">
-            <p class="product-card--name">${ this.substringText(product.name)}</p>
-            <h3 class="product-card--price"><small>Por:</small> ${ product.price}</h3>
-            <p class="product-card--payment-condition">${ this.getPaymentMethodHTML(product.productInfo.paymentConditions) }</p>
+            <a href="#" class="product-card--permalink">
+                <img src="${ product.imageName.replace('//www.itelios.com.br/arquivos/imagens', '/images')}" alt="${product.name}" class="product-card--image">
+                <p class="product-card--name">${ this.substringText(product.name)}</p>
+                <h3 class="product-card--price"><small>Por:</small> ${ product.price}</h3>
+                <p class="product-card--payment-condition">${ this.getPaymentMethodHTML(product.productInfo.paymentConditions) }</p>
+            </a>
 
             <a href="#" class="button product-card--add-to-cart">Adicionar ao Carrinho <i class="material-icons">add_shopping_cart</i></a>
         </div>
