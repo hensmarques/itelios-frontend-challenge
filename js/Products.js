@@ -41,7 +41,7 @@ class Products {
             <img src="${ product.imageName.replace('//www.itelios.com.br/arquivos/imagens', '/images')}" alt="${product.name}" class="product-card--image">
             <p class="product-card--name">${ this.substringText(product.name)}</p>
             <h3 class="product-card--price"><small>Por:</small> ${ product.price}</h3>
-            <p class="product-card--payment-condition">${ product.productInfo.paymentConditions}</p>
+            <p class="product-card--payment-condition">${ this.getPaymentMethodHTML(product.productInfo.paymentConditions) }</p>
 
             <a href="#" class="button product-card--add-to-cart">Adicionar ao Carrinho</a>
         </div>
@@ -60,6 +60,13 @@ class Products {
         }
 
         return formattedStr
+    }
+
+    getPaymentMethodHTML(str){
+        const reg = /(?<=ou até)(.*)(?=sem juros)/
+        const regMatch = str.match(reg)
+        
+        return regMatch ? str.replace(regMatch[0], `<strong>${regMatch[0]}</strong>`) : str
     }
 }
 
