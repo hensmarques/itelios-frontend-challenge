@@ -31,7 +31,7 @@ class Slider {
         this.data.pagination.innerHTML = ''
 
         for(let i = 0; i < dotsQtd; i++){
-            this.data.pagination.innerHTML += `<li class="${ i == 0 ? 'active' : '' }"></li>`
+            this.data.pagination.innerHTML += `<li class="${ i == this.data.currentIndex ? 'active' : '' }"></li>`
         }
         
         this.data.pagination_children = document.querySelectorAll(`${this.params.el} + .product-slider--pagination li`)
