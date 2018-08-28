@@ -281,6 +281,7 @@ var Slider = function () {
             this.data.pagination = document.querySelector(this.params.el + ' + .product-slider--pagination');
 
             this.renderPagination();
+            this.setItensPerPage();
             this.addScrollEvent();
         }
     }, {
@@ -317,34 +318,39 @@ var Slider = function () {
             });
         }
     }, {
-        key: 'setChildrenStyle',
-        value: function setChildrenStyle() {
+        key: 'addScrollEvent',
+        value: function addScrollEvent() {
             var _this2 = this;
 
-            this.data.children.forEach(function (child) {
-                child.style = 'transform: translateX(' + -100 * _this2.data.currentIndex * _this2.data.itens_per_page + '%)';
+            window.addEventListener("resize", function (event) {
+                _this2.setItensPerPage();
             });
         }
     }, {
-        key: 'addScrollEvent',
-        value: function addScrollEvent() {
+        key: 'setChildrenStyle',
+        value: function setChildrenStyle() {
             var _this3 = this;
 
-            window.addEventListener("resize", function (event) {
-                if (window.innerWidth >= 1025) {
-                    _this3.data.itens_per_page = 3;
-                }
-
-                if (window.innerWidth > 640 && window.innerWidth <= 1024) {
-                    _this3.data.itens_per_page = 2;
-                }
-
-                if (window.innerWidth <= 640) {
-                    _this3.data.itens_per_page = 1;
-                }
-
-                _this3.renderPagination();
+            this.data.children.forEach(function (child) {
+                child.style = 'transform: translateX(' + -100 * _this3.data.currentIndex * _this3.data.itens_per_page + '%)';
             });
+        }
+    }, {
+        key: 'setItensPerPage',
+        value: function setItensPerPage() {
+            if (window.innerWidth >= 1025) {
+                this.data.itens_per_page = 3;
+            }
+
+            if (window.innerWidth > 640 && window.innerWidth <= 1024) {
+                this.data.itens_per_page = 2;
+            }
+
+            if (window.innerWidth <= 640) {
+                this.data.itens_per_page = 1;
+            }
+
+            this.renderPagination();
         }
     }]);
 

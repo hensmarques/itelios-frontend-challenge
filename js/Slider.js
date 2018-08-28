@@ -20,9 +20,9 @@ class Slider {
         this.data.childrenLength = this.data.children.length;
         this.data.pagination = document.querySelector(`${this.params.el} + .product-slider--pagination`)
 
-        this.renderPagination();
-        this.addScrollEvent();
-    
+        this.renderPagination()
+        this.setItensPerPage()   
+        this.addScrollEvent()   
     }
 
     renderPagination(){
@@ -53,28 +53,32 @@ class Slider {
         })
     }
 
+    addScrollEvent(){
+        window.addEventListener("resize", (event) => {
+            this.setItensPerPage()
+        })
+    }
+
     setChildrenStyle(){
         this.data.children.forEach(child => {
             child.style = `transform: translateX(${-100 * this.data.currentIndex * this.data.itens_per_page}%)`
         })
     }
     
-    addScrollEvent(){
-        window.addEventListener("resize", (event) => {
-            if(window.innerWidth >= 1025){
-                this.data.itens_per_page = 3;
-            }
+    setItensPerPage(){
+        if(window.innerWidth >= 1025){
+            this.data.itens_per_page = 3;
+        }
 
-            if(window.innerWidth > 640 && window.innerWidth <= 1024 ){
-                this.data.itens_per_page = 2;
-            }
+        if(window.innerWidth > 640 && window.innerWidth <= 1024 ){
+            this.data.itens_per_page = 2;
+        }
 
-            if(window.innerWidth <= 640){
-                this.data.itens_per_page = 1;
-            }
+        if(window.innerWidth <= 640){
+            this.data.itens_per_page = 1;
+        }
 
-            this.renderPagination();
-        })
+        this.renderPagination();
     }
 }
 
