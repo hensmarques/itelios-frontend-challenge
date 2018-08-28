@@ -22,7 +22,7 @@ class Slider {
 
         this.renderPagination()
         this.setItensPerPage()   
-        this.addScrollEvent()   
+        this.addResizeEvent()   
     }
 
     renderPagination(){
@@ -53,7 +53,7 @@ class Slider {
         })
     }
 
-    addScrollEvent(){
+    addResizeEvent(){
         window.addEventListener("resize", (event) => {
             this.setItensPerPage()
         })
@@ -78,7 +78,7 @@ class Slider {
             this.data.itens_per_page = 1;
         }
 
-        this.renderPagination();
+        this.renderPagination();    
     }
 }
 
