@@ -53,9 +53,9 @@ Para os estilos do teste, utilizei a linguagem Stylus por sua simplicidade e cla
 
 Quanto ao grid, me inspirei na nomenclatura do framework Foundation (`column small-x large-x`) para nomear as classes. E para desenvolvê-lo (assim como no front-end em geral), utilizei o módulo FlexBox (módulo nativo dos navegadores). 
 
-Utilizei um padrão de nomenclatura de classes inspirado na metodologia BEM, com algumas modificações: ao invés de separar Blocos de Elementos com `__`, separo com `--`, e ao invés de separar modificadores com `--`, separo com `_`. Faço da seguinte forma, quando tenho liberdade para tal, só por visualmente preferir traços a underlines. 
+Utilizei um padrão de nomenclatura de classes inspirado na metodologia BEM com algumas modificações: ao invés de separar Blocos de Elementos com `__`, separo com `--`, e, ao invés de separar modificadores com `--`, separo com `_`. Faço da seguinte forma (quando tenho liberdade), só por visualmente preferir traços a underlines. 
 
-Poderão notar que não recorro ao JavaScript para nenhum fim que possa ser resolvido com CSS puro. Inclusive poderão notar que para o slider, por exemplo, há somente **uma** regra de CSS adicionada pelo JavaScript. Notarão também que os estilos do próprio slider são pouquíssimos: não mais que 16 linhas, desconsiderado a paginação.
+Poderão notar que não recorro ao JavaScript para nenhum fim que possa ser resolvido com CSS puro. Inclusive notarão também que para o slider, por exemplo, há somente **uma** regra de CSS adicionada pelo JavaScript. Notarão também que os estilos do próprio slider são pouquíssimos: não mais que 16 linhas, desconsiderado a paginação.
 
 
 ## Para o rodar o teste
