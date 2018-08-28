@@ -1,35 +1,53 @@
 .product-card
     &--wrapper
-        padding 40px 25px 25px 25px
+        padding 10px 25px 25px 25px
         border 0.5px solid #edeaea
-        max-height 400px
         overflow hidden
         transition all .8s
-        background linear-gradient(to bottom, #f4f4f4, white)
-        background-size 100% -1%
-        background-repeat no-repeat
         min-height 100%
         
-        &:hover
-            max-height 480px
-            background-size 100% 100%
-            align-self baseline
+        @media $large
+            background linear-gradient(to bottom, #f4f4f4, white)
+            background-size 100% -1%
+            background-repeat no-repeat
+            padding-top 40px
+            max-height 400px
+        
+            &:hover
+                max-height 480px
+                background-size 100% 100%
+                align-self baseline
 
-            .product-card--add-to-cart
-                display block
+                .product-card--add-to-cart
+                    display block
 
     &--image
-        max-height 150px
+        max-height 120px
         display block
         margin 0 auto
 
+        @media $medium
+            max-height 150px
+
     &--name 
         margin-top 27px
+
+        @media screen and (min-width: 639px) and (max-width: 1179px)
+            display block
+            min-height 76px
+            margin-top 10px
+
+        @media screen and (min-width: 1180px)
+            min-height 57px
 
     &--price
         color $c_teal
         font-family $body-font-family
         margin-bottom 10px
+        margin-top 0
+        
+        @media $large
+            margin-top 23px
 
         small 
             color $c_teal-light
@@ -41,10 +59,17 @@
         font-size 17px
         margin 0
 
+        @media $medium
+            display block
+            min-height 40px
+
         strong
             color $c_teal
 
     &--add-to-cart
         display block
         margin-top 25px
-        display none
+
+        @media $large
+            display none
+
